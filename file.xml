@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<city>
+   <id>78</id>
+   <name>Санкт-Петербург</name>
+   <coordinates>
+      <x>596</x>
+      <y>3019</y>
+   </coordinates>
+   <creationDate>15.02.2022</creationDate>
+   <area>1439</area>
+   <population>5607916</population>
+   <metersAboveSeaLevel>5</metersAboveSeaLevel>
+   <populationDensity>3383</populationDensity>
+   <telephoneCode>812</telephoneCode>
+   <standardOfLiving>HIGH</standardOfLiving>
+   <governor>19.05.1956</governor>
+</city>
