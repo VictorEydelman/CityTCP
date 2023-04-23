@@ -1,6 +1,6 @@
-package Server.Commands;
+package client.Commands;
 
-import Common.interfase.*;
+import Common.interfase.Command;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 /**
  * Class that execute commands, stores the registered commands and a list of the last called commands
  */
-public class InvokerServer implements Serializable {
+public class Invoker implements Serializable {
     private static final ArrayList<String> CommandHistory = new ArrayList<>();
 
     private static final HashMap<String, Command> commandMap = new HashMap<>();
@@ -23,7 +23,7 @@ public class InvokerServer implements Serializable {
      * @param command command
      */
     public void register(String commandName, Command command){
-        commandMap.put(commandName,command);
+        commandMap.put(commandName, command);
     }
 
     /**
@@ -33,7 +33,7 @@ public class InvokerServer implements Serializable {
      * @throws IOException mistake
      */
     public void executeCommand(String[] commandName) throws ParseException, IOException, NoSuchElementException {
-        try{
+        try {
             if (commandName.length>0) {
                 CommandHistory.add(commandName[0]);
                 Command command = commandMap.get(commandName[0]);
@@ -54,7 +54,8 @@ public class InvokerServer implements Serializable {
      * Method for get commandMap
      * @return commandMap
      */
-    public static HashMap<String,Command> getCommandMap(){
+    public static HashMap<String, Command> getCommandMap(){
+        System.out.println(commandMap);
         return commandMap;
     }
 

@@ -1,16 +1,24 @@
 package Server.Commands;
 
+import Common.ConcreteCommands.*;
+import client.Commands.Invoker;
+
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
 /**
  * Class for recording which commands exist and reading which command was received at the input
  */
-/*public class CommandManager {
+public class CommandManagerServer {
     /**
      * Method for recording which commands exist and reading which command was received at the input
      * @throws IOException mistake
      */
-     /*public static void start() throws IOException {
-         InvokerServer invoker = new Invoker();
-         ReceiverS r = new Receiver(invoker);
+     public static void start() throws IOException {
+         Invoker invoker = new Invoker();
+         ReceiverServer r = new ReceiverServer(invoker);
          invoker.register("help", new Help(r));
          invoker.register("info", new Info(r));
          invoker.register("show", new Show(r));
@@ -28,7 +36,7 @@ package Server.Commands;
          invoker.register("filter_less_than_standard_of_living", new FilterStandardOfLiving(r));
          invoker.register("print_ascending", new PrintAscending(r));
      }
-     public static void Scan() throws IOException{
+     public static void Scan() throws IOException {
          Invoker invoker = new Invoker();
          try (Scanner sc = new Scanner(System.in)) {
              System.out.print(">");
@@ -45,4 +53,4 @@ package Server.Commands;
              throw new RuntimeException(e);
          }
      }
-}*/
+}
