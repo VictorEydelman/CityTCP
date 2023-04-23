@@ -1,13 +1,10 @@
 package Common.ConcreteCommands;
 
-import Common.SeriMessage;
+import Common.interfase.Command;
 import Server.Collections.StandardOfLiving;
 import Server.Commands.ReceiverServer;
-import Common.interfase.Command;
-import Server.ServerCity;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 /**
  * Class for a command that outputs all elements of a collection whose standardOfLiving field value is less than the specified one
@@ -47,11 +44,10 @@ public class FilterStandardOfLiving implements Command{
      * Method with information
      */
     @Override
-    public void Information() throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(ServerCity.getss().getOutputStream());
-        out.writeObject(new SeriMessage("Команда filter_less_than_standard_of_living - она выводит элементы," +
+    public String Information() throws IOException {
+        return "Команда filter_less_than_standard_of_living - она выводит элементы," +
                 " значение поля standardOfLiving которых меньше заданного." +
                 "Формат ввода: filter_less_than_standard_of_living" +
-                " standardOfLiving(VERY-HIGH, HIGH, MEDIUM, ULTRA_LOW, NIGHTMARE"));
+                " standardOfLiving(VERY-HIGH, HIGH, MEDIUM, ULTRA_LOW, NIGHTMARE";
     }
 }

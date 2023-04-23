@@ -1,16 +1,10 @@
 package Common.ConcreteCommands;
 
-import Common.SeriMessage;
 import Common.interfase.Command;
-import Server.Collections.City;
 import Server.Commands.ReceiverServer;
-import Server.ServerCity;
-import client.Commands.Receiver;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.text.ParseException;
-import java.util.Map;
 
 /**
  * Сlass for the command that updates the collection item
@@ -34,18 +28,22 @@ public class UpdateId implements Command {
     @Override
     public void execute(String[] args) throws ParseException {
         try {
-            if (args.length > 2) {
+            if (args.length > 15) {
                 System.out.println("Введён ненужный аргумент. Команда сведена к базовой команде remove_greater_key null");
             }
-            boolean t = false;
-            for (Map.Entry<Integer, City> entry : Receiver.getmap().entrySet()) {
+            boolean t = true;
+            /*for (Map.Entry<Integer, City> entry : ReceiverServer.getmap().entrySet()) {
                 if (entry.getKey().equals(args[1])) {
                     t = true;
                     break;
                 }
-            }
+            }*/
             if (t) {
-                receiver.Update(Integer.parseInt(args[1]));
+                String[] newCollection=new String[args.length-2];
+                for(int i=2;i<args.length;i++){
+                    newCollection[i-2]=args[i];
+                }
+                receiver.Update(Integer.parseInt(args[1]),newCollection);
             } else{
                 System.out.println("Введён элемент, которого нет в коллекции.");
             }
@@ -60,9 +58,8 @@ public class UpdateId implements Command {
      * Method with information
      */
     @Override
-    public void Information() throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(ServerCity.getss().getOutputStream());
-        out.writeObject(new SeriMessage("Команда update_id - обновляет элемент" +
-                " коллекции по заданному id. Формат ввода: update_id id"));
+    public String Information() throws IOException {
+        return "Команда update_id - обновляет элемент" +
+                " коллекции по заданному id. Формат ввода: update_id id";
     }
 }

@@ -39,7 +39,7 @@ public class PrintAscendingClient implements Command {
      * Method with information
      */
     @Override
-    public void Information(){
-        System.out.println("Команда print_ascending - выводит элементы коллекции в порядке возрастания.");
+    public String Information(){
+        return "Команда print_ascending - выводит элементы коллекции в порядке возрастания.";
     }
 }

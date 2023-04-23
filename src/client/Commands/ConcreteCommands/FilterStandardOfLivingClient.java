@@ -48,8 +48,8 @@ public class FilterStandardOfLivingClient implements Command {
      * Method with information
      */
     @Override
-    public void Information(){
-        System.out.println("Команда filter_less_than_standard_of_living - она выводит элементы, значение поля standardOfLiving которых меньше заданного." +
-                "Формат ввода: filter_less_than_standard_of_living standardOfLiving(VERY-HIGH, HIGH, MEDIUM, ULTRA_LOW, NIGHTMARE");
+    public String Information(){
+        return "Команда filter_less_than_standard_of_living - она выводит элементы, значение поля standardOfLiving которых меньше заданного." +
+                "Формат ввода: filter_less_than_standard_of_living standardOfLiving(VERY-HIGH, HIGH, MEDIUM, ULTRA_LOW, NIGHTMARE";
     }
 }

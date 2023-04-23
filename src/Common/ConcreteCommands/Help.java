@@ -35,7 +35,7 @@ public class Help implements Command {
      * Method with information
      */
     @Override
-    public void Information() throws IOException {
-        System.out.println("Команда help - получить справку по всем доступным командам.");
+    public String Information() throws IOException {
+        return "Команда help - получить справку по всем доступным командам.";
     }
 }

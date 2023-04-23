@@ -1,12 +1,9 @@
 package Common.ConcreteCommands;
 
-import Common.SeriMessage;
-import Server.Commands.ReceiverServer;
 import Common.interfase.Command;
-import Server.ServerCity;
+import Server.Commands.ReceiverServer;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 /**
  * Class for the command that outputs the last 10 commands
@@ -38,9 +35,8 @@ public class History implements Command {
      * Method with information
      */
     @Override
-    public void Information() throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(ServerCity.getss().getOutputStream());
-        out.writeObject(new SeriMessage("Команда history - команда позволяет увидеть" +
-                " последние 10 выполненных команд."));
+    public String Information() throws IOException {
+        return "Команда history - команда позволяет увидеть" +
+                " последние 10 выполненных команд.";
     }
 }

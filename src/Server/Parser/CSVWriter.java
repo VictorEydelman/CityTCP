@@ -20,7 +20,6 @@ public class CSVWriter {
             writer.write(City.NameCity()+'\n');
             int quantity=0;
             for (Map.Entry<Integer, City> entry:map.entrySet()) {
-                //System.out.println(entry.getValue().);
                 quantity+=1;
                 if (quantity == map.size()){
                     writer.write(entry.getKey() + entry.getValue().String());

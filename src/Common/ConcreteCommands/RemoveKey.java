@@ -1,12 +1,9 @@
 package Common.ConcreteCommands;
 
-import Common.SeriMessage;
-import Server.Commands.ReceiverServer;
 import Common.interfase.Command;
-import Server.ServerCity;
+import Server.Commands.ReceiverServer;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 /**
  * Class for a command that deletes a collection item by its key
@@ -46,8 +43,7 @@ public class RemoveKey implements Command {
      * Method with information
      */
     @Override
-    public void Information() throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(ServerCity.getss().getOutputStream());
-        out.writeObject(new SeriMessage("Команда remove_key - удаление элемента коллекции по его ключу."));
+    public String Information() throws IOException {
+        return "Команда remove_key - удаление элемента коллекции по его ключу.";
     }
 }

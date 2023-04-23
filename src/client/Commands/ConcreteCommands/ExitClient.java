@@ -33,7 +33,7 @@ public class ExitClient implements Command {
      * Method with information
      */
     @Override
-    public void Information(){
-        System.out.println("Команда exit - завершение программы.");
+    public String Information(){
+        return "Команда exit - завершение программы.";
     }
 }

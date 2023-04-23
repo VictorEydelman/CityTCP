@@ -33,7 +33,7 @@ public class SaveClient implements Command {
      * Method with information
      */
     @Override
-    public void Information(){
-        System.out.println("Команда save - сохранить коллекцию в файл.");
+    public String Information(){
+        return "Команда save - сохранить коллекцию в файл.";
     }
 }

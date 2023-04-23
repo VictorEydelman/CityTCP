@@ -40,7 +40,7 @@ public class HelpClient implements Command, Serializable {
      * Method with information
      */
     @Override
-    public void Information(){
-        System.out.println("Команда help - получить справку по всем доступным командам.");
+    public String Information(){
+        return "Команда help - получить справку по всем доступным командам.";
     }
 }

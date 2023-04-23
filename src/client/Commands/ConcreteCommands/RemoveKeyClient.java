@@ -50,7 +50,7 @@ public class RemoveKeyClient implements Command {
      * Method with information
      */
     @Override
-    public void Information(){
-        System.out.println("Команда remove_key - удаление элемента коллекции по его ключу.");
+    public String Information(){
+        return "Команда remove_key - удаление элемента коллекции по его ключу.";
     }
 }

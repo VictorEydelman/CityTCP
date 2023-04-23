@@ -1,12 +1,9 @@
 package Common.ConcreteCommands;
 
-import Common.SeriMessage;
+import Common.interfase.Command;
 import Server.Commands.ReceiverServer;
-import Common.interfase.*;
-import Server.ServerCity;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 /**
  * Class for a command that deletes all elements of a collection
@@ -38,8 +35,7 @@ public class Clear implements Command{
      * Method with information
      */
     @Override
-    public void Information() throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(ServerCity.getss().getOutputStream());
-        out.writeObject(new SeriMessage("Команда clear - удаляет все элементы коллекции."));
+    public String Information() throws IOException {
+        return "Команда clear - удаляет все элементы коллекции.";
     }
 }

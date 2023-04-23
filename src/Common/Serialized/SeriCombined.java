@@ -1,14 +1,15 @@
 package Common.Serialized;
 
 import Common.interfase.Command;
-import client.Commands.CreatCollection;
 
-public class SeriCombined {
+import java.io.Serializable;
+
+public class SeriCombined implements Serializable {
     private Command command;
-    private CreatCollection creatCollection;
+    private String[] creatCollection;
     private int id;
 
-    public SeriCombined (Command command, CreatCollection creatCollection, int id){
+    public SeriCombined (Command command, String[] creatCollection, int id){
         this.command = command;
         this.creatCollection = creatCollection;
         this.id = id;
@@ -18,7 +19,7 @@ public class SeriCombined {
         return command;
     }
 
-    public CreatCollection getCreatCollection(){
+    public String[] getCreatCollection(){
         return creatCollection;
     }
 

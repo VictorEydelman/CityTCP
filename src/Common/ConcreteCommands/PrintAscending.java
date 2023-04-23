@@ -1,12 +1,9 @@
 package Common.ConcreteCommands;
 
-import Common.SeriMessage;
-import Server.Commands.ReceiverServer;
 import Common.interfase.Command;
-import Server.ServerCity;
+import Server.Commands.ReceiverServer;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 /**
  * Class for a command that outputs the elements of a collection in ascending order
@@ -38,9 +35,8 @@ public class PrintAscending implements Command {
      * Method with information
      */
     @Override
-    public void Information() throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(ServerCity.getss().getOutputStream());
-        out.writeObject(new SeriMessage("Команда print_ascending - выводит" +
-                " элементы коллекции в порядке возрастания."));
+    public String Information() throws IOException {
+        return "Команда print_ascending - выводит" +
+                " элементы коллекции в порядке возрастания.";
     }
 }

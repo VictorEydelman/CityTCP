@@ -43,7 +43,8 @@ public class RemoveGreaterKeyClient implements Command {
      * Method with information
      */
     @Override
-    public void Information(){
-        System.out.println("Команда remove_greater_key - удаление из коллекции всех элементов, ключ которых превышает заданный. Формат ввода: remove_greater_key key.");
+    public String Information(){
+        return "Команда remove_greater_key - удаление из коллекции" +
+                " всех элементов, ключ которых превышает заданный. Формат ввода: remove_greater_key key.";
     }
 }

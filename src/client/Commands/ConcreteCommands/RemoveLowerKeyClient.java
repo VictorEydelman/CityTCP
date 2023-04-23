@@ -47,7 +47,8 @@ public class RemoveLowerKeyClient implements Command {
      * Method with information
      */
     @Override
-    public void Information(){
-        System.out.println("Команда remove_lower_key - удаление из коллекции всех элементов, ключ которых меньше заданного. Формат ввода: remove_lower_key null key.");
+    public String Information(){
+        return "Команда remove_lower_key - удаление из коллекции всех элементов," +
+                " ключ которых меньше заданного. Формат ввода: remove_lower_key null key.";
     }
 }

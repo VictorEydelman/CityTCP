@@ -1,6 +1,7 @@
 package Server.Parser;
 import Server.Collections.*;
 import Server.Commands.ReceiverServer;
+import client.Commands.CreatCollection;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -37,9 +38,7 @@ public class CSVParser {
         String file="";
 
         if (arg.length>0) {
-            //System.out.println(arg[0]);
             arg[0]=arg[0].replace("/","//");
-            //System.out.println(arg[0]);
             fileName = Path.of(arg[0]);
         } else {
             file = "file.csv";
@@ -72,9 +71,17 @@ public class CSVParser {
                     String creation=String.valueOf(LocalDate.now());
                     line += ","+creation;
                     line1 = line.split(",");
-                    int key = Integer.parseInt(line1[0]);
-                    line1[0] = Integer.toString(map.size()+1);
-                    WorkWithTreeMap.AddToTreeMap(map, key, line1);
+                    if (line1.length!=12){
+                        System.out.println("Не верный элемент коллекции");
+                    } else {
+                        int key = Integer.parseInt(line1[0]);
+                        line1[0] = Integer.toString(map.size() + 1);
+                        if(CreatCollection.creatCollectionCSV(line1)) {
+                            WorkWithTreeMap.AddToTreeMap(map, key, line1);
+                        } else {
+                            System.out.println("Не верный элемент коллекции");
+                        }
+                    }
                 }
                 t=true;
                 line = "";
@@ -83,9 +90,17 @@ public class CSVParser {
         String creation=String.valueOf(LocalDate.now());
         line+=","+creation;
         line1 = line.split(",");
-        int key = Integer.parseInt(line1[0]);
-        line1[0] = Integer.toString(map.size()+1);
-        WorkWithTreeMap.AddToTreeMap(map, key, line1);
+        if (line1.length!=12){
+            System.out.println("Не верный элемент коллекции");
+        } else {
+            int key = Integer.parseInt(line1[0]);
+            line1[0] = Integer.toString(map.size() + 1);
+            if(CreatCollection.creatCollectionCSV(line1)) {
+                WorkWithTreeMap.AddToTreeMap(map, key, line1);
+            } else {
+                System.out.println("Не верный элемент коллекции");
+            }
+        }
     }
 
     /**

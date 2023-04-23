@@ -21,5 +21,5 @@ public interface Command extends Serializable {
     /**
      * Fild for Information
      */
-    void Information() throws IOException;
+    String Information() throws IOException;
 }

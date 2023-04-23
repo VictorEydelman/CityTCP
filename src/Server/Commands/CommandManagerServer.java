@@ -1,12 +1,9 @@
 package Server.Commands;
 
 import Common.ConcreteCommands.*;
-import client.Commands.Invoker;
+import Common.Invoker;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 /**
  * Class for recording which commands exist and reading which command was received at the input
@@ -35,22 +32,5 @@ public class CommandManagerServer {
          invoker.register("max_by_meters_above_sea_level", new MaxMeters(r));
          invoker.register("filter_less_than_standard_of_living", new FilterStandardOfLiving(r));
          invoker.register("print_ascending", new PrintAscending(r));
-     }
-     public static void Scan() throws IOException {
-         Invoker invoker = new Invoker();
-         try (Scanner sc = new Scanner(System.in)) {
-             System.out.print(">");
-             while (true) {
-                 String[] s= sc.nextLine().trim().split(" ");
-                 System.out.println(s);
-                 invoker.executeCommand(s);
-                 System.out.print(">");
-             }
-         } catch (NoSuchElementException ex) {
-             System.out.println("Вы ввели выход из программы");
-             System.exit(0);
-         } catch (ParseException e) {
-             throw new RuntimeException(e);
-         }
      }
 }

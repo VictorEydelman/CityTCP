@@ -39,7 +39,7 @@ public class HistoryClient implements Command {
      * Method with information
      */
     @Override
-    public void Information(){
-        System.out.println("Команда history - команда позволяет увидеть последние 10 выполненных команд.");
+    public String Information(){
+        return "Команда history - команда позволяет увидеть последние 10 выполненных команд.";
     }
 }

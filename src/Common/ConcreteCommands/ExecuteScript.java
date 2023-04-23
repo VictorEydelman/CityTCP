@@ -1,12 +1,9 @@
 package Common.ConcreteCommands;
 
-import Common.SeriMessage;
 import Common.interfase.Command;
 import Server.Commands.ReceiverServer;
-import Server.ServerCity;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.nio.file.NoSuchFileException;
 
 /**
@@ -46,9 +43,8 @@ public class ExecuteScript implements Command {
      * Method with information
      */
     @Override
-    public void Information() throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(ServerCity.getss().getOutputStream());
-        out.writeObject(new SeriMessage("Команда execute_script - она позволяет считывать команды из файла." +
-                " Формат ввода: execute_script file_name"));
+    public String Information() throws IOException {
+        return "Команда execute_script - она позволяет считывать команды из файла." +
+                " Формат ввода: execute_script file_name";
     }
 }

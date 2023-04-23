@@ -1,12 +1,9 @@
 package Common.ConcreteCommands;
 
-import Common.SeriMessage;
-import Server.Commands.ReceiverServer;
 import Common.interfase.Command;
-import Server.ServerCity;
+import Server.Commands.ReceiverServer;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.text.ParseException;
 
 /**
@@ -30,10 +27,14 @@ public class Insert implements Command {
     @Override
     public void execute(String[] args) throws ParseException, IOException {
         try {
-            if (args.length > 2) {
+            if (args.length > 15) {
                 System.out.println("Введён ненужный аргумент. Команда сведена к базовой команде insert null");
             }
-            receiver.Insert(Integer.parseInt(args[1]));
+            String[] newCollection=new String[args.length-2];
+            for(int i=2;i<args.length;i++){
+                newCollection[i-2]=args[i];
+            }
+            receiver.Insert(Integer.parseInt(args[1]),newCollection);
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException ex){
             System.out.println("Не введён или не правильно введён ключ для создания коллекции");
         } catch (IOException e) {
@@ -45,9 +46,8 @@ public class Insert implements Command {
      * Method with information
      */
     @Override
-    public void Information() throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(ServerCity.getss().getOutputStream());
-        out.writeObject(new SeriMessage("Команда insert - создаёт новый элемент коллекции." +
-                " Формат ввода: insert key"));
+    public String Information() throws IOException {
+        return "Команда insert - создаёт новый элемент коллекции." +
+                " Формат ввода: insert key";
     }
 }

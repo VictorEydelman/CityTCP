@@ -1,4 +1,4 @@
-package client.Commands;
+package Common;
 
 import Common.interfase.Command;
 
@@ -37,8 +37,6 @@ public class Invoker implements Serializable {
             if (commandName.length>0) {
                 CommandHistory.add(commandName[0]);
                 Command command = commandMap.get(commandName[0]);
-                System.out.println(commandMap);
-                System.out.println(command);
                 command.execute(commandName);
             } else {
                 System.out.println("Вы не ввели команду.");

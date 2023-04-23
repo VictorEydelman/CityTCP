@@ -43,7 +43,7 @@ public class ExecuteScriptClient implements Command {
      * Method with information
      */
     @Override
-    public void Information(){
-        System.out.println("Команда execute_script - она позволяет считывать команды из файла. Формат ввода: execute_script file_name");
+    public String Information(){
+        return "Команда execute_script - она позволяет считывать команды из файла. Формат ввода: execute_script file_name";
     }
 }

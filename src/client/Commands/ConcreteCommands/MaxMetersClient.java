@@ -39,7 +39,7 @@ public class MaxMetersClient implements Command {
      * Method with information
      */
     @Override
-    public void Information(){
-        System.out.println("Команда max_by_meters_above_sea_level - вывести любой элемент из коллекции, значение поля metersAboveSeaLevel которого является максимальным.");
+    public String Information(){
+        return "Команда max_by_meters_above_sea_level - вывести любой элемент из коллекции, значение поля metersAboveSeaLevel которого является максимальным.";
     }
 }

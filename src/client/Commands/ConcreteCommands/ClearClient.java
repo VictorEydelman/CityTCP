@@ -39,7 +39,7 @@ public class ClearClient implements Command {
      * Method with information
      */
     @Override
-    public void Information(){
-        System.out.println("Команда clear - удаляет все элементы коллекции.");
+    public String Information(){
+        return "Команда clear - удаляет все элементы коллекции.";
     }
 }

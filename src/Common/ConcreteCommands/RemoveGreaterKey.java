@@ -1,12 +1,9 @@
 package Common.ConcreteCommands;
 
-import Common.SeriMessage;
-import Server.Commands.ReceiverServer;
 import Common.interfase.Command;
-import Server.ServerCity;
+import Server.Commands.ReceiverServer;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 /**
  * Class for a command that deletes all collection objects whose key is greater, than the specified one
@@ -46,9 +43,8 @@ public class RemoveGreaterKey implements Command {
      * Method with information
      */
     @Override
-    public void Information() throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(ServerCity.getss().getOutputStream());
-        out.writeObject(new SeriMessage("Команда remove_greater_key - удаление из коллекции" +
-                " всех элементов, ключ которых превышает заданный. Формат ввода: remove_greater_key key."));
+    public String Information() throws IOException {
+        return "Команда remove_greater_key - удаление из коллекции" +
+                " всех элементов, ключ которых превышает заданный. Формат ввода: remove_greater_key key.";
     }
 }

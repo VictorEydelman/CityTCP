@@ -36,6 +36,10 @@ public class InsertClient implements Command, Serializable {
             System.out.println("Не введён или не правильно введён ключ для создания коллекции");
         } catch (IOException e) {
             throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -43,7 +47,7 @@ public class InsertClient implements Command, Serializable {
      * Method with information
      */
     @Override
-    public void Information(){
-        System.out.println("Команда insert - создаёт новый элемент коллекции. Формат ввода: insert key");
+    public String Information(){
+        return "Команда insert - создаёт новый элемент коллекции. Формат ввода: insert key";
     }
 }

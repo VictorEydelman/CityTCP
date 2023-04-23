@@ -39,7 +39,7 @@ public class ShowClient implements Command {
      * Method with information
      */
     @Override
-    public void Information(){
-        System.out.println("Команда show - вывод всех элементов коллекции.");
+    public String Information(){
+        return "Команда show - вывод всех элементов коллекции.";
     }
 }

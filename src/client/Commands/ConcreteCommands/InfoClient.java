@@ -39,7 +39,7 @@ public class InfoClient implements Command {
      * Method with information
      */
     @Override
-    public void Information(){
-        System.out.println("Команда info - получить информацию по коллекции.");
+    public String Information(){
+        return "Команда info - получить информацию по коллекции.";
     }
 }

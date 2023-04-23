@@ -26,7 +26,6 @@ public class WorkWithTreeMap {
      * @throws ParseException mistake
      */
     public static void AddToTreeMap(Map<Integer,City> map, int j, String[] line1) throws ParseException {
-        //System.out.println(line1[11]);
         map.put(j,new City(Integer.parseInt(line1[0]), line1[1],
                         new Coordinates(Long.parseLong(line1[2]), Integer.parseInt(line1[3])),
                         LocalDate.parse(line1[11]), Float.parseFloat(line1[4]),

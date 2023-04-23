@@ -1,15 +1,15 @@
 package client.Commands;
 
 import Common.ConcreteCommands.*;
+import Common.Invoker;
 import Common.Serialized.Seri;
+import Common.Serialized.SeriCombined;
 import Common.Serialized.Seriobject;
 import Common.Serialized.Seritwo;
 import Server.Collections.City;
 import Server.Collections.StandardOfLiving;
 import Server.Commands.ReceiverServer;
 import Server.Parser.CSVWriter;
-import Server.Parser.WorkWithTreeMap;
-import client.Commands.ConcreteCommands.Additional.IdToKey;
 import client.write.send;
 
 import java.io.IOException;
@@ -120,8 +120,13 @@ public class Receiver implements Serializable {
      * @throws ParseException mistake
      * @throws IOException mistake
      */
-    public void Insert(int arg) throws ParseException, IOException {
-        //send.send(new Seri(new Insert(new Receiver(invoker))));
+    public void Insert(int arg) throws IOException, ClassNotFoundException, InterruptedException {
+        ArrayList<String> m = Invoker.getCommandHistory();
+        if (m.get(m.size() - CommandNumber-1).equals("execute_script")){
+            send.send(new SeriCombined(new Insert(new ReceiverServer(invoker)),CreatCollection.creatCollectionExecute(),arg));
+        } else {
+            send.send(new SeriCombined(new Insert(new ReceiverServer(invoker)),CreatCollection.creatCollection(),arg));
+        }
     }
 
     /**
@@ -130,15 +135,14 @@ public class Receiver implements Serializable {
      * @throws ParseException mistake
      * @throws IOException mistake
      */
-    public void Update(int arg) throws ParseException, IOException {
-        int key = IdToKey.getKey(map, arg);
+    public void Update(int arg) throws IOException, ClassNotFoundException, InterruptedException {
+        //int key = IdToKey.getKey(map, arg);
         ArrayList<String> m = Invoker.getCommandHistory();
         if (m.get(m.size() - CommandNumber - 1).equals("execute_script")) {
-            WorkWithTreeMap.ReplaceTreeMap(map, key, CreatCollection.creatCollectionExecute());
+            send.send(new SeriCombined(new UpdateId(new ReceiverServer(invoker)),CreatCollection.creatCollectionExecute(),arg));
         } else {
-            WorkWithTreeMap.ReplaceTreeMap(map, key, CreatCollection.creatCollection());
+            send.send(new SeriCombined(new UpdateId(new ReceiverServer(invoker)),CreatCollection.creatCollection(),arg));
         }
-        System.out.println("Элемент с id равным " + arg + " заменён в коллекции");
     }
 
     /**
@@ -147,33 +151,73 @@ public class Receiver implements Serializable {
      * @throws IOException mistake
      */
     public void Execute(String file) throws IOException {
-        Invoker invoker = new Invoker();
-        path = Paths.get(file);
-        CommandNumber = 0;
-        try (Scanner scanner = new Scanner(path)) {
-            while (scanner.hasNextLine()) {
-                ArrayList<String> m = Invoker.getCommandHistory();
-                CommandNumber++;
-                invoker.executeCommand(scanner.nextLine().trim().split(" "));
-                if (m.get(m.size() - 1).equals("insert") || m.get(m.size() - 1).equals("update_id")) {
-                    for (int i = 0; i < NumberLine - 2; i++) {
-                        scanner.nextLine();
-                    }
-                }
-                NumberLine = 0;
+        boolean t=true;
+        ArrayList<String> filehistory =CommandManager.getFile(file);
+        for (String s : filehistory) {
+            if (Objects.equals(s, file)) {
+                t = false;
+                break;
             }
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchElementException ex) {
-            System.out.println("Ошибка в вводе команды");
+        }
+        if (t) {
+            CommandManager.setFile(file);
+            Invoker invoker = new Invoker();
+            path = Paths.get(file);
+            CommandNumber = 0;
+            try (Scanner scanner = new Scanner(path)) {
+                while (scanner.hasNextLine()) {
+                    ArrayList<String> m = Invoker.getCommandHistory();
+                    CommandNumber++;
+                    System.out.println(file);
+                    invoker.executeCommand(scanner.nextLine().trim().split(" "));
+                    if (m.get(m.size() - 1).equals("insert") || m.get(m.size() - 1).equals("update_id")) {
+                        for (int i = 0; i < NumberLine - 2; i++) {
+                            scanner.nextLine();
+                        }
+                    }
+                    NumberLine = 0;
+                }
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            } catch (NoSuchElementException ex) {
+                System.out.println("Ошибка в вводе команды");
+            }
+        } else {
+            System.out.println("Рекурсия");
         }
     }
+    /**
+     * Method for get File
+     * @return path
+     */
+    public static Path getFile(){
+        return path;
+    }
+
+    /**
+     * Method for get number of line
+     * @return NumberLine
+     */
+    public static int getNumberLine(){
+        NumberLine++;
+        return NumberLine;
+    }
+
 
     /**
      * Command implementation history
      */
     public void History() throws IOException, ClassNotFoundException, InterruptedException {
-        send.send(new Seri(new History(new ReceiverServer(invoker))));
+        ArrayList<String> History= Invoker.getCommandHistory();
+        if (History.size()>10){
+            for (int i=History.size()-1;i>History.size()-11;i--){
+                System.out.println(History.get(i)+" ");
+            }
+        } else {
+            for (int i=History.size()-1;i>=0;i--){
+                System.out.println(History.get(i)+" ");
+            }
+        }
     }
 
     /**
@@ -183,9 +227,7 @@ public class Receiver implements Serializable {
     public void RemoveGreater(int key) throws IOException {
         try {
             send.send(new Seritwo( new RemoveGreaterKey(new ReceiverServer(invoker)),key));
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
+        } catch (ClassNotFoundException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }

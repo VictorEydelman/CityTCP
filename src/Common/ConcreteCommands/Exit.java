@@ -1,12 +1,9 @@
 package Common.ConcreteCommands;
 
-import Common.SeriMessage;
 import Common.interfase.Command;
 import Server.Commands.ReceiverServer;
-import Server.ServerCity;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 /**
  * Class for the team that exits the program
@@ -38,8 +35,7 @@ public class Exit implements Command {
      * Method with information
      */
     @Override
-    public void Information() throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(ServerCity.getss().getOutputStream());
-        out.writeObject(new SeriMessage("Команда exit - завершение программы."));
+    public String Information() throws IOException {
+        return "Команда exit - завершение программы.";
     }
 }

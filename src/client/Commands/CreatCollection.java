@@ -2,8 +2,7 @@ package client.Commands;
 
 import Server.Collections.Human;
 import Server.Collections.StandardOfLiving;
-import Server.Commands.Reader.*;
-import Server.Commands.ReceiverServer;
+import client.Commands.Reader.Reader;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -20,10 +19,10 @@ public class CreatCollection {
      * @return newCity new element of collection
      */
     public static String[] creatCollection() throws IOException {
-        String id = Integer.toString(ReceiverServer.getsize()+1);
+        /*String id = Integer.toString(ReceiverServer.getsize()+1);
         while (!boolid(id)){
             id = Integer.toString(ReceiverServer.getsize()+1);
-        }
+        }*/
 
         String name = Reader.read("Введите название города: ");
         while (!boolName(name)){
@@ -80,35 +79,38 @@ public class CreatCollection {
             governor = Reader.read("Дата рождения губернатора (формат ввода: dd.mm.yyyy HH:mm:ss): ");
         }
 
-        return new String[]{id,name, coordinates_X, coordinates_Y,
+        return new String[]{name, coordinates_X, coordinates_Y,
                 area, population, metersAboveSeaLevel, populationDensity,
                 telephoneCode, standardOfLiving, governor,creationDate};
     }
 
+
+
+    public static boolean creatCollectionCSV(String[] line) {
+        return (boolName(line[1]) && boolCoordinatesX(line[2]) && boolCoordinatesY(line[3])
+                && boolFloat(line[4]) && boolpopulation(line[5]) && boolmeters(line[6])
+                && boolpopulationDensity(line[7]) && booltelephoneCode(line[8])
+                && boolStandardOfLiving(line[9]) && boolHuman(line[10]));
+    }
     /**
      * Method for getting data about a new collection item
      * @return newCity new element of collection
      * @throws IOException mistake
      */
     public static String[] creatCollectionExecute() throws IOException {
-        String id = Integer.toString(ReceiverServer.getsize()+1);
-        while (!boolid(id)){
-            id = Integer.toString(ReceiverServer.getsize()+1);
-        }
-
-        String name = Reader.readExecute("Введите название города: ");
+        String name = Reader.readExecute();
         while (!boolName(name)){
-            name = Reader.readExecute("Введите название города: ");
+            name = Reader.readExecute();
         }
 
-        String coordinates_X = Reader.readExecute("Введите широту города: ");
+        String coordinates_X = Reader.readExecute();
         while (!boolCoordinatesX(coordinates_X)){
-            coordinates_X = Reader.readExecute("Введите широту города: ");
+            coordinates_X = Reader.readExecute();
         }
 
-        String coordinates_Y = Reader.readExecute("Введите долготу города: ");
+        String coordinates_Y = Reader.readExecute();
         while (!boolCoordinatesY(coordinates_Y)){
-            coordinates_Y = Reader.readExecute("Введите долготу города: ");
+            coordinates_Y = Reader.readExecute();
         }
 
         String creationDate = String.valueOf(LocalDate.now());
@@ -116,42 +118,42 @@ public class CreatCollection {
             creationDate = String.valueOf(LocalDate.now());
         }
 
-        String area = Reader.readExecute("Укажите площадь города: ");
+        String area = Reader.readExecute();
         while (!boolFloat(area)){
-            area = Reader.readExecute("Укажите площадь города: ");
+            area = Reader.readExecute();
         }
 
-        String population = Reader.readExecute("Население города: ");
+        String population = Reader.readExecute();
         while (!boolpopulation(population)){
-            population = Reader.readExecute("Население города: ");
+            population = Reader.readExecute();
         }
 
-        String metersAboveSeaLevel = Reader.readExecute("Высота город над уровнем моря: ");
+        String metersAboveSeaLevel = Reader.readExecute();
         while (!boolmeters(metersAboveSeaLevel)){
-            metersAboveSeaLevel = Reader.readExecute("Высота город над уровнем моря: ");
+            metersAboveSeaLevel = Reader.readExecute();
         }
 
-        String populationDensity = Reader.readExecute("Плотность населения города: ");
+        String populationDensity = Reader.readExecute();
         while (!boolpopulationDensity(populationDensity)){
-            populationDensity = Reader.readExecute("Плотность населения города: ");
+            populationDensity = Reader.readExecute();
         }
 
-        String telephoneCode = Reader.readExecute("Код города: ");
+        String telephoneCode = Reader.readExecute();
         while (!booltelephoneCode(telephoneCode)){
-            telephoneCode = Reader.readExecute("Код города: ");
+            telephoneCode = Reader.readExecute();
         }
 
-        String standardOfLiving = Reader.readExecute("Уровень жизни в городе (VERY_HIGH, HIGH, MEDIUM, ULTRA_LOW, NIGHTMARE): ");
+        String standardOfLiving = Reader.readExecute();
         while (!boolStandardOfLiving(standardOfLiving)){
-            standardOfLiving = Reader.readExecute("Уровень жизни в городе (VERY_HIGH, HIGH, MEDIUM, ULTRA_LOW, NIGHTMARE): ");
+            standardOfLiving = Reader.readExecute();
         }
 
-        String governor = Reader.readExecute("Дата рождения губернатора (формат ввода: dd.mm.yyyy HH:mm:ss): ");
+        String governor = Reader.readExecute();
         while (!boolHuman(governor)){
-            governor = Reader.readExecute("Дата рождения губернатора (формат ввода: dd.mm.yyyy HH:mm:ss): ");
+            governor = Reader.readExecute();
         }
 
-        return new String[]{id,name, coordinates_X, coordinates_Y,
+        return new String[]{name, coordinates_X, coordinates_Y,
                 area, population, metersAboveSeaLevel, populationDensity,
                 telephoneCode, standardOfLiving, governor,creationDate};
     }

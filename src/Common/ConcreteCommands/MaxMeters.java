@@ -1,12 +1,9 @@
 package Common.ConcreteCommands;
 
-import Common.SeriMessage;
-import Server.Commands.ReceiverServer;
 import Common.interfase.Command;
-import Server.ServerCity;
+import Server.Commands.ReceiverServer;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 /**
  * Class for a command that outputs a collection item whose metersAboveSeaLevel field value is the maximum
@@ -38,9 +35,8 @@ public class MaxMeters implements Command {
      * Method with information
      */
     @Override
-    public void Information() throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(ServerCity.getss().getOutputStream());
-        out.writeObject(new SeriMessage("Команда max_by_meters_above_sea_level - вывести любой элемент из коллекции," +
-                " значение поля metersAboveSeaLevel которого является максимальным."));
+    public String Information() throws IOException {
+        return "Команда max_by_meters_above_sea_level - вывести любой элемент из коллекции," +
+                " значение поля metersAboveSeaLevel которого является максимальным.";
     }
 }
