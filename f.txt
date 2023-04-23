@@ -1,6 +1,6 @@
 execute_script file.txt
 help
-update 6
+update_id 6
 wq
 1
 2

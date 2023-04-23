@@ -1,4 +1,4 @@
-inf
+execute_script f.txt
 insert 4
 wq
 1
@@ -9,4 +9,4 @@ wq
 6
 7
 HIGH
-11.11.1111111:11
+11.11.1111 11:11:11
