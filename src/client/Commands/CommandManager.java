@@ -26,7 +26,6 @@ public class CommandManager {
          invoker.register("update_id", new UpdateIdClient(r));
          invoker.register("remove_key", new RemoveKeyClient(r));
          invoker.register("clear", new ClearClient(r));
-         invoker.register("save", new SaveClient(r));
          invoker.register("execute_script", new ExecuteScriptClient(r));
          invoker.register("exit", new ExitClient(r));
          invoker.register("history", new HistoryClient(r));

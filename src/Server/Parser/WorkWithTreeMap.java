@@ -5,19 +5,20 @@ import Server.Collections.Coordinates;
 import Server.Collections.Human;
 import Server.Collections.StandardOfLiving;
 import Server.Commands.ReceiverServer;
-
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Map;
-import java.lang.String;
 
 /**
  * Class for work with collection
  */
 
 public class WorkWithTreeMap {
+    static Logger logger = LogManager.getLogger(WorkWithTreeMap.class);
     /**
      * Method for adding an item to a collection
      * @param map collection
@@ -33,6 +34,7 @@ public class WorkWithTreeMap {
                         Long.parseLong(line1[7]), Long.parseLong(line1[8]),
                         StandardOfLiving.valueOf(line1[9]),
                         new Human((new SimpleDateFormat("dd.MM.yyyy HH:mm:ss")).parse(line1[10]))));
+        logger.info("Элемент добавлен"+j);
     }
 
     /**
@@ -50,6 +52,7 @@ public class WorkWithTreeMap {
                 Long.parseLong(line1[7]), Long.parseLong(line1[8]),
                 StandardOfLiving.valueOf(line1[9]),
                 new Human((new SimpleDateFormat("dd.MM.yyyy HH:mm:ss")).parse(line1[10]))));
+        logger.info("Элемент обновлён"+j);
     }
 
     /**
@@ -59,5 +62,6 @@ public class WorkWithTreeMap {
     public static void RemoveElementTreeMap(int j){
         Map<Integer,City> map = ReceiverServer.getmap();
         map.remove(j);
+        logger.info("Элемент удалён"+j);
     }
 }

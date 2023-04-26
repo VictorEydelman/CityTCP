@@ -10,7 +10,7 @@ public class Client {
     private static SocketChannel socketChannel = null;
 
     public static void main(String[] args) throws Exception {
-        InetSocketAddress s=new InetSocketAddress("localhost",9998);
+        InetSocketAddress s=new InetSocketAddress("localhost",9997);
         String port="9998";
         socketChannel = SocketChannel.open();
         socketChannel.connect(s);

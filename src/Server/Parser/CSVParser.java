@@ -2,6 +2,8 @@ package Server.Parser;
 import Server.Collections.*;
 import Server.Commands.ReceiverServer;
 import client.Commands.CreatCollection;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -16,7 +18,7 @@ import java.util.*;
 
 public class CSVParser {
     final String[] args;
-
+    static Logger logger = LogManager.getLogger(CSVParser.class);
     private static Path fileName;
 
     /**
@@ -44,6 +46,7 @@ public class CSVParser {
             file = "file.csv";
             fileName = Path.of(file);
         }
+        logger.info("Файл определён");
         Parse(fileName);
     }
 
@@ -72,14 +75,14 @@ public class CSVParser {
                     line += ","+creation;
                     line1 = line.split(",");
                     if (line1.length!=12){
-                        System.out.println("Не верный элемент коллекции");
+                        logger.error("Не верный элемент коллекции");
                     } else {
                         int key = Integer.parseInt(line1[0]);
                         line1[0] = Integer.toString(map.size() + 1);
                         if(CreatCollection.creatCollectionCSV(line1)) {
                             WorkWithTreeMap.AddToTreeMap(map, key, line1);
                         } else {
-                            System.out.println("Не верный элемент коллекции");
+                            logger.error("Не верный элемент коллекции");
                         }
                     }
                 }
@@ -91,14 +94,14 @@ public class CSVParser {
         line+=","+creation;
         line1 = line.split(",");
         if (line1.length!=12){
-            System.out.println("Не верный элемент коллекции");
+            logger.error("Не верный элемент коллекции");
         } else {
             int key = Integer.parseInt(line1[0]);
             line1[0] = Integer.toString(map.size() + 1);
             if(CreatCollection.creatCollectionCSV(line1)) {
                 WorkWithTreeMap.AddToTreeMap(map, key, line1);
             } else {
-                System.out.println("Не верный элемент коллекции");
+                logger.error("Не верный элемент коллекции");
             }
         }
     }

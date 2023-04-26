@@ -1,4 +1,6 @@
 key,name,coordinates.getX(),coordinates.getY(),area,population,metersAboveSeaLevel,populationDensity,telephoneCode,standardOfLiving,governor.getBirthday()
+5,q,1,1,1.0,1,1,11,1,HIGH,11.11.1111 11:11:11
+7,1,1,1,1.0,1,1,13213,2,HIGH,11.11.1111 11:11:11
 63,Самара,550,678,787.0,908799,98,989,99,HIGH,21.01.1978 11:11:11
 77,Москва,558,3761,2561.0,13097539,186,4941,495,HIGH,11.09.1959 11:11:11
 78,Санкт-Петербург,596,3019,1439.0,5607916,5,3383,812,HIGH,22.11.1111 11:11:11

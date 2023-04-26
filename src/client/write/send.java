@@ -13,9 +13,6 @@ public class send {
     public static void send(Object m) throws IOException, ClassNotFoundException, InterruptedException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(bos);
-
-        System.out.println(m);
-
         oos.writeObject(m);
         byte[] data = bos.toByteArray();
         Client.getSocketChannel().write(ByteBuffer.wrap(data));

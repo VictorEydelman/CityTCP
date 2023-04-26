@@ -2,16 +2,15 @@ package Server.Commands;
 
 import Common.ConcreteCommands.Additional.IdToKey;
 import Common.ConcreteCommands.Additional.StandardToInt;
+import Common.Invoker;
 import Common.Serialized.SeriMessage;
 import Server.Collections.City;
 import Server.Collections.StandardOfLiving;
 import Server.Parser.CSVWriter;
 import Server.Parser.WorkWithTreeMap;
-import Server.read.write;
-import Common.Invoker;
+import Server.read.sendserver;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -32,6 +31,8 @@ public class ReceiverServer implements Serializable {
     private static int NumberLine;
     private static int CommandNumber=0;
 
+    //static Logger logger = getLogger(ReceiverServer.class);
+
 
     /**
      * Method for
@@ -49,6 +50,7 @@ public class ReceiverServer implements Serializable {
             creationDate=ZonedDateTime.now();
         }
         map=new TreeMap<>();
+        //logger.info("Коллекция создана");
     }
 
     /**
@@ -106,11 +108,10 @@ public class ReceiverServer implements Serializable {
             try {
                 list[0] +=command.Information()+'\n';
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                //logger.error(e);
             }
         });
-        ObjectOutputStream out = new ObjectOutputStream(write.getss().getOutputStream());
-        out.writeObject(new SeriMessage(list[0]));
+        sendserver.send(new SeriMessage(list[0]));
     }
 
     /**
@@ -118,8 +119,8 @@ public class ReceiverServer implements Serializable {
      */
     public void Info() throws IOException {
         //System.out.println(ServerCity.getss());
-        ObjectOutputStream out = new ObjectOutputStream(write.getss().getOutputStream());
-        out.writeObject(new SeriMessage("Тип коллекции - "+ReceiverServer.getName()+"\n"
+        //System.out.println(4);
+        sendserver.send(new SeriMessage("Тип коллекции - "+ReceiverServer.getName()+"\n"
                 +"Дата и время инициализации - "+ReceiverServer.getcreatTime()+"\n"+
                 "Количество элементов коллекции - "+ReceiverServer.getsize()));
     }
@@ -132,8 +133,7 @@ public class ReceiverServer implements Serializable {
      */
     public void Insert(int arg, String[] newCollection) throws ParseException, IOException {
         WorkWithTreeMap.AddToTreeMap(ReceiverServer.getmap(),arg, newCollection);
-        ObjectOutputStream out = new ObjectOutputStream(write.getss().getOutputStream());
-        out.writeObject(new SeriMessage("добавлен элемент"));
+        sendserver.send(new SeriMessage("добавлен элемент"));
     }
 
     /**
@@ -145,8 +145,9 @@ public class ReceiverServer implements Serializable {
     public void Update(int arg,String[] newCollection) throws ParseException, IOException {
         int key = IdToKey.getKey(map, arg);
         WorkWithTreeMap.ReplaceTreeMap(map,key,newCollection);
-        ObjectOutputStream out = new ObjectOutputStream(write.getss().getOutputStream());
-        out.writeObject(new SeriMessage("элемент обновлён"));
+        sendserver.send(new SeriMessage("элемент обновлён"));
+        //ObjectOutputStream out = new ObjectOutputStream(write.getc().getOutputStream());
+        //out.writeObject(new SeriMessage("элемент обновлён"));
     }
 
     /**
@@ -217,8 +218,7 @@ public class ReceiverServer implements Serializable {
         for (int i = key + 1; i <= size; i++) {
             WorkWithTreeMap.RemoveElementTreeMap(i);
         }
-        ObjectOutputStream out = new ObjectOutputStream(write.getss().getOutputStream());
-        out.writeObject(new SeriMessage("Все элементы коллекции с ключами большими " + key + " удалены."));
+        sendserver.send(new SeriMessage("Все элементы коллекции с ключами большими " + key + " удалены."));
     }
 
     /**
@@ -229,8 +229,7 @@ public class ReceiverServer implements Serializable {
         for (int i = key - 1; i >0; i--) {
             WorkWithTreeMap.RemoveElementTreeMap(i);
         }
-        ObjectOutputStream out = new ObjectOutputStream(write.getss().getOutputStream());
-        out.writeObject(new SeriMessage("Все элементы коллекции с ключами меньшими " + key + " удалены."));
+        sendserver.send(new SeriMessage("Все элементы коллекции с ключами меньшими " + key + " удалены."));
     }
 
     /**
@@ -245,8 +244,7 @@ public class ReceiverServer implements Serializable {
                 ElementOfCollection = entry.toString();
             }
         }
-        ObjectOutputStream out = new ObjectOutputStream(write.getss().getOutputStream());
-        out.writeObject(new SeriMessage(ElementOfCollection));
+        sendserver.send(new SeriMessage(ElementOfCollection));
     }
 
     /**
@@ -260,8 +258,7 @@ public class ReceiverServer implements Serializable {
                 ListToSend+=entry.toString()+'\n';
             }
         }
-        ObjectOutputStream out = new ObjectOutputStream(write.getss().getOutputStream());
-        out.writeObject(new SeriMessage(ListToSend));
+        sendserver.send(new SeriMessage(ListToSend));
     }
 
     /**
@@ -278,16 +275,14 @@ public class ReceiverServer implements Serializable {
         for(Map.Entry<Integer,City> entry:linkedHashMap.entrySet()){
             ListToSend+=entry.toString()+'\n';
         }
-        ObjectOutputStream out = new ObjectOutputStream(write.getss().getOutputStream());
-        out.writeObject(new SeriMessage(ListToSend));
+        sendserver.send(new SeriMessage(ListToSend));
     }
 
     /**
      * Command implementation show
      */
     public void Show() throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(write.getss().getOutputStream());
-        out.writeObject(new SeriMessage(getAllElements()));
+        sendserver.send(new SeriMessage(getAllElements()));
     }
 
     /**
@@ -296,8 +291,7 @@ public class ReceiverServer implements Serializable {
      */
     public void RemoveKey(int arg) throws IOException {
         WorkWithTreeMap.RemoveElementTreeMap(arg);
-        ObjectOutputStream out = new ObjectOutputStream(write.getss().getOutputStream());
-        out.writeObject(new SeriMessage("Удалён город "+arg));
+        sendserver.send(new SeriMessage("Удалён город "+arg));
     }
 
     /**
@@ -305,8 +299,7 @@ public class ReceiverServer implements Serializable {
      */
     public void Clear() throws IOException {
         map.clear();
-        ObjectOutputStream out = new ObjectOutputStream(write.getss().getOutputStream());
-        out.writeObject(new SeriMessage("Все элементы коллекции удалены"));
+        sendserver.send(new SeriMessage("Все элементы коллекции удалены"));
     }
 
     /**
@@ -319,7 +312,7 @@ public class ReceiverServer implements Serializable {
     /**
      * Command implementation save
      */
-    public void Save() {
+    public static void Save() {
         CSVWriter.Writer(map);
         System.out.println("Коллекция сохранена");
     }

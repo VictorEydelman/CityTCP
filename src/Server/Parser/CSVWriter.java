@@ -1,6 +1,8 @@
 package Server.Parser;
 
 import Server.Collections.City;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -11,6 +13,8 @@ import java.util.Map;
  * Class for writing a collection to a file
  */
 public class CSVWriter {
+
+    static Logger logger = LogManager.getLogger(CSVWriter.class);
     /**
      * Method for writing a collection to a file
      * @param map collection
@@ -27,9 +31,11 @@ public class CSVWriter {
                     writer.write(entry.getKey() + entry.getValue().String() + '\n');
                 }
             }
+            logger.info("Коллекция сохранена");
         }
         catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            logger.error(e);
         }
     }
 }
