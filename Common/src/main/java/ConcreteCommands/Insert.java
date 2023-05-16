@@ -1,9 +1,10 @@
 package ConcreteCommands;
 
 import interfase.Command;
-import sr.Commands.ReceiverServer;
+import interfase.ReceiverServer;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 
 /**
@@ -38,6 +39,10 @@ public class Insert implements Command {
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException ex){
             System.out.println("Не введён или не правильно введён ключ для создания коллекции");
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }

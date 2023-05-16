@@ -6,13 +6,14 @@ import Collections.City;
 import interfase.CreatCollection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import sr.Commands.ReceiverServer;
+import interfase.ReceiverServer;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Map;
@@ -41,7 +42,7 @@ public class CSVParser {
      * @throws IOException mistake
      * @throws ParseException mistake
      */
-    public static void Reader(String[] arg) throws IOException, ParseException {
+    public static void Reader(String[] arg) throws IOException, ParseException, SQLException, ClassNotFoundException {
         String file="";
 
         if (arg.length>0) {
@@ -61,7 +62,7 @@ public class CSVParser {
      * @throws IOException mistake
      * @throws ParseException mistake
      */
-    public static void Parse(Path fileName) throws IOException, ParseException {
+    public static void Parse(Path fileName) throws IOException, ParseException, SQLException, ClassNotFoundException {
         FileInputStream input = new FileInputStream(fileName.toFile());
         InputStreamReader reader = new InputStreamReader(input, StandardCharsets.UTF_8);
         Map<Integer, City> map = ReceiverServer.getmap();

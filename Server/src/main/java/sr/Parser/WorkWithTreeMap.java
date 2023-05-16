@@ -6,8 +6,9 @@ import Collections.City;
 import Collections.Coordinates;
 import Collections.Human;
 import Collections.StandardOfLiving;
-import sr.Commands.ReceiverServer;
+import interfase.ReceiverServer;
 
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -26,15 +27,17 @@ public class WorkWithTreeMap {
      * @param line1 elements
      * @throws ParseException mistake
      */
-    public static void AddToTreeMap(Map<Integer, City> map, int j, String[] line1) throws ParseException {
-        map.put(j,new City(Integer.parseInt(line1[0]), line1[1],
-                        new Coordinates(Long.parseLong(line1[2]), Integer.parseInt(line1[3])),
-                        LocalDate.parse(line1[11]), Float.parseFloat(line1[4]),
-                        Integer.parseInt(line1[5]), Long.parseLong(line1[6]),
-                        Long.parseLong(line1[7]), Long.parseLong(line1[8]),
-                        StandardOfLiving.valueOf(line1[9]),
-                        new Human((new SimpleDateFormat("dd.MM.yyyy HH:mm:ss")).parse(line1[10]))));
-        logger.info("Элемент добавлен"+j);
+    public static void AddToTreeMap(Map<Integer, City> map, int j, String[] line1) throws ParseException, SQLException, ClassNotFoundException {
+        if(WorkWithSQL.AddToTreeMap(line1)) {
+            map.put(j, new City(Integer.parseInt(line1[0]), line1[1],
+                    new Coordinates(Long.parseLong(line1[2]), Integer.parseInt(line1[3])),
+                    LocalDate.parse(line1[11]), Float.parseFloat(line1[4]),
+                    Integer.parseInt(line1[5]), Long.parseLong(line1[6]),
+                    Long.parseLong(line1[7]), Long.parseLong(line1[8]),
+                    StandardOfLiving.valueOf(line1[9]),
+                    new Human((new SimpleDateFormat("dd.MM.yyyy HH:mm:ss")).parse(line1[10]))));
+            logger.info("Элемент добавлен" + j);
+        }
     }
 
     /**

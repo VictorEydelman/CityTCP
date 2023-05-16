@@ -1,7 +1,7 @@
 package ConcreteCommands;
 
 import interfase.Command;
-import sr.Commands.ReceiverServer;
+import interfase.ReceiverServer;
 
 import java.io.IOException;
 

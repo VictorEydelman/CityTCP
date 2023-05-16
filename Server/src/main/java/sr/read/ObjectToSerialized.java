@@ -4,7 +4,7 @@ import Serialized.Seri;
 import Serialized.SeriCombined;
 import Serialized.Seriobject;
 import Serialized.Seritwo;
-import sr.Commands.ReceiverServer;
+import interfase.ReceiverServer;
 
 import java.io.IOException;
 import java.text.ParseException;
